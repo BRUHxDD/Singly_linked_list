@@ -57,16 +57,31 @@ namespace single_linked_list
                 newnode.next = current;
                 previous.next = newnode;
             }
-            public bool delNode(int rollNo)
+        }
+        public bool delnode(int rollNo)
+        {
+            Node previous, current;
+            previous = current = null;
+            if (search(rollNo, ref previous, ref current) == false)
+                return false;
+            previous.next = current.next;
+            if (current == START)
+                START = START.next;
+            return true;
+        }
+        public bool search(int rollNo, ref Node previous, ref Node current)
+        {
+            previous = START;
+            current = START;
+            while((current != null) && (rollNo == current.rollNumber))
             {
-                Node previous, current;
-                previous = current = null;
-                if(Search(rollNo, ref previous, ref current)== false)
-                    return false;
-                previous.next = current.next;
-                if (current == START)
-                    START = START.next;
+                previous = current;
+                current = current.next;
             }
+            if (current == null)
+                return false;
+            else
+                return true;
         }
     }
 }
